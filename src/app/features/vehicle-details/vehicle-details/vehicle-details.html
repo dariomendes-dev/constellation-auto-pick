@@ -1,0 +1,149 @@
+<div class="car-details mat-elevation-z4">
+  <div class="header">
+    <h1>Vehicle Details</h1>
+    <button matButton="filled" class="back-button" (click)="goBack()">
+      Go back
+    </button>
+  </div>
+  <!-- Image Gallery -->
+  <div class="image-gallery">
+    <div
+      class="main-image"
+      (mouseenter)="showArrows = true"
+      (mouseleave)="showArrows = false"
+    >
+      <img [src]="carImages[selectedImageIndex]" alt="Car image" />
+
+      <button
+        *ngIf="showArrows"
+        class="nav-arrow left"
+        (click)="prevImage()"
+        aria-label="Previous Image"
+      >
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+
+      <button
+        *ngIf="showArrows"
+        class="nav-arrow right"
+        (click)="nextImage()"
+        aria-label="Next Image"
+      >
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+
+    <div class="thumbnail-strip">
+      <img
+        *ngFor="let img of carImages; let i = index"
+        [src]="img"
+        [class.selected]="i === selectedImageIndex"
+        (click)="selectImage(i)"
+        alt="Car thumbnail"
+      />
+    </div>
+  </div>
+  <!-- Main Info -->
+  <div class="main-info">
+    <div class="title">
+      <h1>{{ vehicle.make }} {{ vehicle.model }}</h1>
+      <div class="subtitle">
+        {{ vehicle.year }} | {{ vehicle.engineSize }} | {{ vehicle.fuel }} |
+        {{ vehicle.mileage }}mi
+      </div>
+    </div>
+    <div class="bid-info">
+      <mat-chip color="primary" selected>
+        Starting Bid: {{ vehicle.startingBid | currency: "GBP" }}
+      </mat-chip>
+      <div (click)="toggleFavourite()" class="favourite">
+        <ng-container *ngIf="vehicle.favourite">
+          <mat-icon>star</mat-icon>
+          Favourited
+        </ng-container>
+        <ng-container *ngIf="!vehicle.favourite"
+          ><mat-icon>star_border</mat-icon> Unfavourited</ng-container
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- Auction -->
+  <div class="section">
+    <h2>Auction Info</h2>
+    <p>
+      Auction Date:
+      <strong>{{ vehicle.auctionDateTime | date: "medium" }}</strong>
+    </p>
+    <p class="auction-timer" *ngIf="timeRemaining">
+      Starts in: <strong>{{ timeRemaining }}</strong>
+    </p>
+  </div>
+
+  <!-- Specifications & Ownership -->
+  <div class="section spec-ownership">
+    <div class="specs">
+      <h2>Specifications</h2>
+      <ul>
+        <li>
+          <strong>Vehicle Type:</strong>
+          {{ vehicle.details.specification.vehicleType }}
+        </li>
+        <li>
+          <strong>Colour:</strong> {{ vehicle.details.specification.colour }}
+        </li>
+        <li><strong>Fuel:</strong> {{ vehicle.details.specification.fuel }}</li>
+        <li>
+          <strong>Transmission:</strong>
+          {{ vehicle.details.specification.transmission }}
+        </li>
+        <li>
+          <strong>Doors:</strong>
+          {{ vehicle.details.specification.numberOfDoors }}
+        </li>
+        <li>
+          <strong>CO₂ Emissions:</strong>
+          {{ vehicle.details.specification.co2Emissions }}
+        </li>
+        <li>
+          <strong>NOx Emissions:</strong>
+          {{ vehicle.details.specification.noxEmissions }} mg/km
+        </li>
+        <li>
+          <strong>Number of Keys:</strong>
+          {{ vehicle.details.specification.numberOfKeys }}
+        </li>
+      </ul>
+    </div>
+    <div class="ownership">
+      <h2>Ownership</h2>
+      <ul>
+        <li>
+          <strong>Log Book:</strong> {{ vehicle.details.ownership.logBook }}
+        </li>
+        <li>
+          <strong>Previous Owners:</strong>
+          {{ vehicle.details.ownership.numberOfOwners }}
+        </li>
+        <li>
+          <strong>First Registered:</strong>
+          {{ vehicle.details.ownership.dateOfRegistration | date: "longDate" }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Equipment -->
+  <div class="section">
+    <h2>Equipment</h2>
+    <mat-chip-set>
+      <mat-chip
+        *ngFor="let item of vehicle.details.equipment"
+        color="accent"
+        selected
+      >
+        {{ item }}
+      </mat-chip>
+    </mat-chip-set>
+  </div>
+</div>

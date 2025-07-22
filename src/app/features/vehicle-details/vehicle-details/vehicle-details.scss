@@ -1,0 +1,186 @@
+.car-details {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  border-radius: 12px;
+  max-width: 1000px;
+  margin: 40px auto;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+
+    .back-button {
+      width: auto;
+      align-self: flex-start;
+    }
+  }
+
+  .image-gallery {
+    .main-image {
+      position: relative;
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 12px;
+
+      img {
+        width: 100%;
+        max-height: 450px;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .nav-arrow {
+        position: absolute;
+        top: 50%;
+        z-index: 10;
+        height: 48px;
+        width: 48px;
+        border-radius: 50%;
+        border: 0px;
+        background-color: rgba(255, 255, 255, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 0;
+
+        &.left {
+          left: 16px;
+        }
+
+        &.right {
+          right: 16px;
+        }
+
+        mat-icon {
+          font-size: 24px;
+          line-height: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        &:hover {
+          background-color: #fff;
+        }
+      }
+    }
+
+    .thumbnail-strip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+
+      img {
+        height: 72px;
+        width: auto;
+        border-radius: 4px;
+        cursor: pointer;
+        opacity: 0.7;
+        border: 2px solid transparent;
+        transition: all 0.2s ease-in-out;
+
+        &.selected {
+          opacity: 1;
+          border-color: #3f51b5;
+        }
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .main-info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 16px;
+
+    .title {
+      h1 {
+        font-size: 2rem;
+        margin: 0;
+        color: #333;
+      }
+
+      .subtitle {
+        font-size: 1.1rem;
+        word-spacing: 0.3rem;
+        color: #666;
+        margin-top: 12px;
+      }
+    }
+
+    .bid-info {
+      text-align: right;
+
+      mat-chip {
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+
+      .favourite {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        font-size: 1rem;
+        color: #f57c00;
+        margin-top: 2px;
+      }
+    }
+  }
+
+  .section {
+    margin-top: 12px;
+
+    h2 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: #444;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        margin-bottom: 6px;
+        font-size: 1rem;
+
+        strong {
+          color: #555;
+        }
+      }
+    }
+
+    mat-chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+  }
+
+  .spec-ownership {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+
+    .specs,
+    .ownership {
+      flex: auto;
+    }
+  }
+}

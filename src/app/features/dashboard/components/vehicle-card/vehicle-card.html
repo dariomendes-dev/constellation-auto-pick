@@ -1,0 +1,53 @@
+<div class="sort-bar" *ngIf="columnsConfig?.length">
+  <b>Sort:</b>
+  <ng-container *ngFor="let col of columnsConfig">
+    <div *ngIf="col.isSortable" class="sort-button" (click)="sortBy(col.field)">
+      {{ col.label }}
+      <div class="button-icon">
+        <mat-icon *ngIf="sortData.field === col.field">
+          {{ sortData.direction === "asc" ? "arrow_upward" : "arrow_downward" }}
+        </mat-icon>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<div class="vehicle-card-list">
+  <div class="vehicle-card" *ngFor="let vehicle of dataSource" (click)="goToDetails(vehicle)">
+    <img class="vehicle-image" [src]="'assets/images/vehicle-image-placeholder.png'" alt="vehicle image" />
+
+    <div class="vehicle-info">
+      <div class="vehicle-info-header">
+        <div class="vehicle-title">{{ vehicle.make }} {{ vehicle.model }}</div>
+
+        <mat-icon class="favourite-icon" (click)="toggleFavourite(vehicle, $event)">
+          {{ vehicle.favourite ? "star" : "star_border" }}
+        </mat-icon>
+      </div>
+
+      <div class="vehicle-price">
+        Starting bid:
+        <span class="price-value">{{ vehicle.startingBid | currency : "GBP" }}</span>
+      </div>
+
+      <div class="vehicle-fields-container">
+        <div
+          *ngFor="let col of columnsConfig"
+          class="vehicle-grid-field"
+          [ngClass]="{
+            hidden: [
+              'image',
+              'make',
+              'model',
+              'startingBid',
+              'favourite',
+            ].includes(col.field),
+          }"
+        >
+          <span class="field-label">{{ col.label }}</span>
+          <span class="field-value">{{ getFieldValue(vehicle, col.field) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
