@@ -31,7 +31,11 @@ This is a simple Angular project that displays a list of vehicles available for 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/dariomendes-dev/constellation-auto-pick.git
+   git clone https://github.com/your-username/vehicle-dashboard.git
+
+2. Install node modules:
+   ```bash
+   npm install
 
 ## Development server
 
